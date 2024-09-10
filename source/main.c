@@ -1,7 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
+
+void sleep(unsigned int ms);
+
+#if defined(_WIN32) || defined(__WIN32__) || defined(__WINDOWS__)
+    #include <windows.h>
+
+    void sleep(unsigned int ms) {
+        Sleep(ms);
+    }
+#else
+    #include <unistd.h>
+
+    void sleep(unsigned int ms) {
+        usleep(ms * 1000);
+    }
+#endif
+
 void clear_line(void)
 {
     printf("\033[1A");
@@ -37,7 +53,7 @@ int main(int argc, char const* argv[])
             begin_char_code += 1;
             anim_string[anim_idx] = (char)begin_char_code;
             printf("%s\n", anim_string);
-            usleep(1000);
+            sleep(1);
             clear_line();
         }
         anim_idx += 1;
