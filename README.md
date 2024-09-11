@@ -1,5 +1,5 @@
 # freakyprint
-### Print out stuff to the console in a *freaky* way.
+Print out stuff to the console in a *freaky* way.
 
 ## How to
 
