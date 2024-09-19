@@ -5,17 +5,19 @@
 void sleep(unsigned int ms);
 
 #if defined(_WIN32) || defined(__WIN32__) || defined(__WINDOWS__)
-    #include <windows.h>
+#include <windows.h>
 
-    void sleep(unsigned int ms) {
-        Sleep(ms);
-    }
+void sleep(unsigned int ms)
+{
+    Sleep(ms);
+}
 #else
-    #include <unistd.h>
+#include <unistd.h>
 
-    void sleep(unsigned int ms) {
-        usleep(ms * 1000);
-    }
+void sleep(unsigned int ms)
+{
+    usleep(ms * 1000);
+}
 #endif
 
 void clear_line(void)
@@ -32,6 +34,8 @@ int main(int argc, char const* argv[])
     if (argc > 1) {
         freaky_string = argv[1];
         len = strlen(freaky_string);
+    } else {
+        perror("No string has been provided\n");
     }
 
     char* anim_string = malloc(len * sizeof(char));
